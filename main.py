@@ -11,13 +11,13 @@ class tkinterApp(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
 
-        container = tk.Frame(self)
-        container.grid(row=0, column=0)
+        self.container = tk.Frame(self)
+        self.container.grid(row=0, column=0)
 
         self.frames = {}
 
-        for F in (StartPage, MainPage, UnitPage):
-            frame = F(container, self)
+        for F in (StartPage, MainPage):
+            frame = F(self.container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
             frame.grid_remove()
@@ -35,6 +35,16 @@ class tkinterApp(tk.Tk):
             self.frames[fme].grid_remove()
         frame = self.frames[cont]
         frame.grid()
+
+    # This function is used for adding frames after certain conditions
+    # The UnitPage for example can only exist after a workspace is established
+    # Therefore we use this is add the frame to self.frames
+    def add_frame(self, frame):
+        if not frame in self.frames:
+            init_frame = frame(self.container, self)
+            self.frames[frame] = init_frame
+            init_frame.grid(row=0, column=0, sticky="nsew")
+            init_frame.grid_remove()
 
     def remove_last_workspace(self):
         config = ConfigManager().read()

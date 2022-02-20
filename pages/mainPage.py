@@ -22,4 +22,5 @@ class MainPage(tk.Frame):
         self.unit_button.grid(row=1, column=0, pady=5)
 
     def goto_unit_manager(self):
+        self.controller.add_frame(UnitPage)
         self.controller.show_frame(UnitPage)

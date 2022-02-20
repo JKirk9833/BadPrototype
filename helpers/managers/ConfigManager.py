@@ -33,7 +33,7 @@ class ConfigManager:
     # If a key is provided, the value of the key will be returned or an empty dict if invalid
     def read(self, key=None):
         if not os.path.isfile(self.config_path):
-            return {}
+            return ""
 
         try:
             with open(self.config_path) as f:
@@ -43,7 +43,6 @@ class ConfigManager:
         except:
             print("[read_config] ERROR: JSON in config invalid, regenerating file.")
             os.remove(self.config_path)
-            self.setup("")
 
     # Will write the new_config dict (replaces the old configuration)
     def replace(self, new_config):

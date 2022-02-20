@@ -4,6 +4,7 @@ from helpers.managers.ConfigManager import ConfigManager
 
 def get_iso_name(ws_path=None, extension=True):
     iso_dir = ws_path or ConfigManager().read("last_workspace")
+    print(iso_dir)
     dir_contents = os.listdir(iso_dir)
     for file in dir_contents:
         if file.endswith(".iso"):

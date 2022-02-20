@@ -1,7 +1,6 @@
 from collections import namedtuple
 import math
 import pathlib
-import struct
 from helpers.finders.fileFinder import get_iso_name
 from helpers.managers.ConfigManager import ConfigManager
 
@@ -11,10 +10,12 @@ Unit = namedtuple(
 
 # UNITS ARE ALL IN ALPHABETICAL ORDER NO MATTER WHAT PLEASE
 # OTHERWISE I CAN'T MAP SYMBOLS TO NAMES EFFICIENTLY
+
+# Actually, since we have GB's of RAM
 class UnitManager:
     def __init__(self):
         self.last_workspace = ConfigManager().read("last_workspace")
-        self.iso_name = get_iso_name(self.last_workspace, extension=False)
+        self.iso_name = get_iso_name(extension=False)
         self.unit_dir = (
             f"{self.last_workspace}/{self.iso_name}_MODDED/gladius_bec/data/units/"
         )
